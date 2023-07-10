@@ -72,8 +72,9 @@ promptSubmit.addEventListener("submit", async (event) => {
   const userInput = form.userPrompt.value;
 
   //empty the conversation section area
-  // conversation.innerText = "";
   document.querySelector(".quick-example-prompt").innerHTML = "";
+
+  document.querySelector("form button").setAttribute("disabled", true);
 
   /***
    * Update Prompt history
@@ -150,6 +151,9 @@ promptSubmit.addEventListener("submit", async (event) => {
 
     //  Handling error and show the error message to ui
     if (data.error) {
+      // button disable false 
+      document.querySelector("form button").removeAttribute("disabled");
+
       // Append the error response to the chat area.
       article.innerHTML = `
          <div class="prompt-message error-message">
@@ -160,6 +164,8 @@ promptSubmit.addEventListener("submit", async (event) => {
       form.userPrompt.value = "";
       form.userPrompt.focus();
     } else {
+      // button disable false 
+      document.querySelector("form button").removeAttribute("disabled");
       // Append the user's message and generated model response to the chat area.
       article.innerHTML = `
          <div class="prompt-message">
@@ -172,6 +178,8 @@ promptSubmit.addEventListener("submit", async (event) => {
       form.userPrompt.focus();
     }
   } catch (error) {
+    // button disable false 
+    document.querySelector("form button").removeAttribute("disabled");
     // handling error in console log
     console.log(error);
     // Append the error response to the chat area.
@@ -205,7 +213,6 @@ const handleDeleteBtn = (event) => {
 // click new chat to append example prompts
 const newChat = document.querySelector(".new-chat");
 newChat.addEventListener("click", () => {
-
   conversation.innerHTML = `
   <h1>OWN CHAT-GPT</h1>
 
