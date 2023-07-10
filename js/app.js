@@ -62,6 +62,9 @@ promptSubmit.userPrompt.focus();
  *    Handle the API response and extract the generated model response.
  **/
 
+// select submit button
+const submitBtn = document.querySelector("form button");
+
 // Update the conversation interface and prompt history
 const conversation = document.querySelector(".conversation");
 promptSubmit.addEventListener("submit", async (event) => {
@@ -71,10 +74,16 @@ promptSubmit.addEventListener("submit", async (event) => {
   const form = event.target;
   const userInput = form.userPrompt.value;
 
+  if (userInput.length < 2) {
+    return alert("Please enter at least 2 characters");
+  }
+
   //empty the conversation section area
   document.querySelector(".quick-example-prompt").innerHTML = "";
 
-  document.querySelector("form button").setAttribute("disabled", true);
+  submitBtn.setAttribute("disabled", true);
+  submitBtn.style.pointerEvents = "none";
+  submitBtn.style.opacity = "0.5";
 
   /***
    * Update Prompt history
@@ -151,8 +160,10 @@ promptSubmit.addEventListener("submit", async (event) => {
 
     //  Handling error and show the error message to ui
     if (data.error) {
-      // button disable false 
-      document.querySelector("form button").removeAttribute("disabled");
+      // button disable false
+      submitBtn.removeAttribute("disabled");
+      submitBtn.style.pointerEvents = "auto";
+      submitBtn.style.opacity = "1";
 
       // Append the error response to the chat area.
       article.innerHTML = `
@@ -164,8 +175,10 @@ promptSubmit.addEventListener("submit", async (event) => {
       form.userPrompt.value = "";
       form.userPrompt.focus();
     } else {
-      // button disable false 
-      document.querySelector("form button").removeAttribute("disabled");
+      // button disable false
+      submitBtn.removeAttribute("disabled");
+      submitBtn.style.pointerEvents = "auto";
+      submitBtn.style.opacity = "1";
       // Append the user's message and generated model response to the chat area.
       article.innerHTML = `
          <div class="prompt-message">
@@ -178,8 +191,10 @@ promptSubmit.addEventListener("submit", async (event) => {
       form.userPrompt.focus();
     }
   } catch (error) {
-    // button disable false 
-    document.querySelector("form button").removeAttribute("disabled");
+    // button disable false
+    submitBtn.removeAttribute("disabled");
+    submitBtn.style.pointerEvents = "auto";
+    submitBtn.style.opacity = "1";
     // handling error in console log
     console.log(error);
     // Append the error response to the chat area.
