@@ -72,7 +72,8 @@ promptSubmit.addEventListener("submit", async (event) => {
   const userInput = form.userPrompt.value;
 
   //empty the conversation section area
-  conversation.innerText = "";
+  // conversation.innerText = "";
+  document.querySelector(".quick-example-prompt").innerHTML = "";
 
   /***
    * Update Prompt history
@@ -107,30 +108,29 @@ promptSubmit.addEventListener("submit", async (event) => {
 
   // set loader while fetch data from api
   article.innerHTML = `            
-      <div class="loader">
-      <div class="loader-animation">
-         <span></span>
-         <span></span>
-      </div>
-      <p>Responding</p>
-      </div>`;
+    <div class="loader">
+    <div class="loader-animation">
+        <span></span>
+        <span></span>
+    </div>
+    <p>Responding</p>
+    </div>`;
+  conversation.appendChild(article);
+  form.userPrompt.value = "";
+  form.userPrompt.focus();
 
   // Scroll the chat area to the bottom to show the latest messages.
   conversation.scrollTop = conversation.scrollHeight;
 
   /**
-  * Update the conversation interface:
-  *   fetch data with handling error
-  *   Handling error and show the error message to ui
-  *   Append the error response to the chat area.
-  *   Append the user's message and generated model response to the chat area.
-  *   Format and style the conversation history to distinguish between user and model messages.
-  *   Scroll the chat area to the bottom to show the latest messages.
-  * */
-
-  conversation.appendChild(article);
-  form.userPrompt.value = "";
-  form.userPrompt.focus();
+   * Update the conversation interface:
+   *   fetch data with handling error
+   *   Handling error and show the error message to ui
+   *   Append the error response to the chat area.
+   *   Append the user's message and generated model response to the chat area.
+   *   Format and style the conversation history to distinguish between user and model messages.
+   *   Scroll the chat area to the bottom to show the latest messages.
+   * */
 
   //   fetch data with handling error
   try {
@@ -150,25 +150,36 @@ promptSubmit.addEventListener("submit", async (event) => {
 
     //  Handling error and show the error message to ui
     if (data.error) {
-
       // Append the error response to the chat area.
       article.innerHTML = `
          <div class="prompt-message error-message">
          <i class="fa-solid fa-triangle-exclamation"></i>
             <p>Error: ${data.error.message}</p>
          </div>`;
+      conversation.appendChild(article);
+      form.userPrompt.value = "";
+      form.userPrompt.focus();
     } else {
       // Append the user's message and generated model response to the chat area.
       article.innerHTML = `
          <div class="prompt-message">
-            <i class="fa-solid fa-angles-right prompt-icon"></i>
+         <i class="fa-solid fa-terminal"></i>
             <h2>${userInput}</h2>
          </div>
          <p><b>Response:</b> ${data.choices[0].message.content}</p>`;
+      conversation.appendChild(article);
+      form.userPrompt.value = "";
+      form.userPrompt.focus();
     }
   } catch (error) {
-    // handling error in console log 
+    // handling error in console log
     console.log(error);
+    // Append the error response to the chat area.
+    article.innerHTML = `
+      <div class="prompt-message error-message">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+          <p>Error: ${error}</p>
+      </div>`;
   }
 });
 
@@ -194,9 +205,7 @@ const handleDeleteBtn = (event) => {
 // click new chat to append example prompts
 const newChat = document.querySelector(".new-chat");
 newChat.addEventListener("click", () => {
-  conversation.innerHTML = `
-  <h1>OWN CHAT-GPT</h1>
-  <section>
+  document.querySelector(".quick-example-prompt").innerHTML = `
     <h2>EXAMPLES</h2>
     <div class="example-prompts">
       <button onclick="handleExamplePrompt(event)" class="example-prompt">
@@ -229,8 +238,9 @@ newChat.addEventListener("click", () => {
         evidence supporting them.
         <i class="fa-regular fa-square-caret-right"></i>
       </button>
-    </div>
-  </section>`;
+    </div>`;
+    promptSubmit.userPrompt.value = '';
+    promptSubmit.userPrompt.focus();
 });
 
 // click example set prompts to user input
@@ -238,3 +248,5 @@ const handleExamplePrompt = (event) => {
   promptSubmit.userPrompt.value = event.target.innerText;
   promptSubmit.userPrompt.focus();
 };
+
+// ------------------------------------ End code ------------------------------------

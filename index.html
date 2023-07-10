@@ -14,7 +14,7 @@
 
       <!-- Menu button -->
       <button class="menu-btn"><i class="fas fa-bars"></i></button>
-      <aside>
+      <aside id="scrollbar-style">
         <button class="close-menu-btn">X</button>
         <div class="new-chat">
           <h4>+ New Chat</h4>
@@ -32,7 +32,7 @@
           <h1>OWN CHAT-GPT</h1>
 
           <!-- The conversation will show here dynamically by javascript  -->
-          <section>
+          <section class="quick-example-prompt">
             <h2>EXAMPLES</h2>
             <div class="example-prompts">
               <button onclick="handleExamplePrompt(event)" class="example-prompt">
@@ -87,7 +87,6 @@
     <!-- link javascript  -->
     <script src="./js/config.js"></script>
     <script src="./js/app.js"></script>
-    <script src="./js/promptHistory.js"></script>
 
     <!-- link font-awesome cdn  -->
     <script
