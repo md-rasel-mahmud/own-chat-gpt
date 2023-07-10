@@ -13,7 +13,7 @@ body {
   scroll-behavior: smooth;
 }
 
-section {
+body > section {
   display: flex;
   min-height: 100vh;
 }
@@ -92,8 +92,36 @@ main {
   min-width: 60vw;
 }
 
+.example-prompts{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  min-height: 60%;
+  align-content: end;
+  padding: 0 1rem;
+  overflow: auto;
+}
+.conversation section h2 {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: .5rem;
+  padding: 1rem 0;
+}
+.example-prompt{
+  padding: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: .5rem;
+  color: white;
+  cursor: pointer;
+  text-align: left;
+  line-height: 1.5rem;
+}
+.example-prompt:hover{
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 .conversation h1 {
-  color: green;
+  color: white;
   padding: 1rem;
   border-radius: 0.5rem;
   /* background-color: darkgreen; */
@@ -232,6 +260,15 @@ article {
   article {
     min-width: 80vw;
   }
+  .example-prompts{
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    align-content: baseline;
+    gap: .5rem;
+  }
+  .example-prompt{
+    padding: .5rem;
+  }
+
   #scrollbar-style::-webkit-scrollbar {
     width: 2px;
     border-radius: 10px;

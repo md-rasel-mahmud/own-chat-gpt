@@ -1,5 +1,3 @@
-//NOTE: I am using this api key for demo purpose so I am showing this apiKey publicly. But whenever I use this API key in production I will use the API key by environment variable.
-
 /**
  * TODO:
  * Write JavaScript code for user input:
@@ -29,6 +27,18 @@ import * as config from 'config'
 //  Add an event listener to capture user input from the input box
 const promptSubmit = document.querySelector(".prompt-form");
 
+// Example Prompts  
+const examplePrompt = document.querySelectorAll(".example-prompt")
+examplePrompt.forEach((items) => { 
+  items.addEventListener("click", (e) => {
+    console.log(e.target.innerText);
+    promptSubmit.userPrompt.value = e.target.innerText;
+  })
+})
+
+
+// Append the user's message and generated model response to the chat area
+const conversation = document.querySelector(".conversation");
 promptSubmit.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -37,8 +47,8 @@ promptSubmit.addEventListener("submit", async (e) => {
   const userInput = form.userPrompt.value;
   console.log(userInput);
 
-  // Append the user's message and generated model response to the chat area
-  const conversation = document.querySelector(".conversation");
+
+  conversation.innerText = ''
 
   const article = document.createElement("article");
   article.innerHTML = `            
