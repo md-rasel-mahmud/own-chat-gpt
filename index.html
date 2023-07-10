@@ -9,17 +9,19 @@
     <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body id="scrollbar-style">
-    <section>
+    <section class="main-section">
       <!-- Sidebar area Start -->
+
+      <!-- Menu button -->
+      <button class="menu-btn"><i class="fas fa-bars"></i></button>
       <aside>
+        <button class="close-menu-btn">X</button>
         <div class="new-chat">
           <h4>+ New Chat</h4>
         </div>
         <div class="prompt-history">
-          <button class="prompt-history-btn">
-            <i class="fa-solid fa-angles-right prompt-icon"></i>
-            hello
-          </button>
+          <h4>Prompt History</h4>
+          <!-- The prompt history will be show here dynamically by javascript -->
         </div>
       </aside>
       <!-- Sidebar area End -->
@@ -29,32 +31,39 @@
         <div id="scrollbar-style" class="scrollbar conversation">
           <h1>OWN CHAT-GPT</h1>
 
+          <!-- The conversation will show here dynamically by javascript  -->
           <section>
-            <h2>---- Examples ----</h2>
+            <h2>EXAMPLES</h2>
             <div class="example-prompts">
-              <button class="example-prompt">
+              <button onclick="handleExamplePrompt(event)" class="example-prompt">
                 Can you explain the concept of artificial intelligence and its
-                potential applications? <i class="fa-regular fa-square-caret-right"></i>
+                potential applications?
+                <i class="fa-regular fa-square-caret-right"></i>
               </button>
-              <button class="example-prompt">
+              <button onclick="handleExamplePrompt(event)" class="example-prompt">
                 What are some effective strategies for time management and
-                increasing productivity? <i class="fa-regular fa-square-caret-right"></i>
+                increasing productivity?
+                <i class="fa-regular fa-square-caret-right"></i>
               </button>
-              <button class="example-prompt">
+              <button onclick="handleExamplePrompt(event)" class="example-prompt">
                 Discuss the impact of climate change on the environment and
-                possible mitigation measures. <i class="fa-regular fa-square-caret-right"></i>
+                possible mitigation measures.
+                <i class="fa-regular fa-square-caret-right"></i>
               </button>
-              <button class="example-prompt">
-                Can you provide an overview of the history and significance of the
-                Industrial Revolution <i class="fa-regular fa-square-caret-right"></i>
+              <button onclick="handleExamplePrompt(event)" class="example-prompt">
+                Can you provide an overview of the history and significance of
+                the Industrial Revolution
+                <i class="fa-regular fa-square-caret-right"></i>
               </button>
-              <button class="example-prompt">
+              <button onclick="handleExamplePrompt(event)" class="example-prompt">
                 Explore the ethical implications of genetic engineering and its
-                potential benefits and risks <i class="fa-regular fa-square-caret-right"></i>
+                potential benefits and risks
+                <i class="fa-regular fa-square-caret-right"></i>
               </button>
-              <button class="example-prompt">
+              <button onclick="handleExamplePrompt(event)" class="example-prompt">
                 Discuss the major theories of the origin of the universe and the
-                evidence supporting them. <i class="fa-regular fa-square-caret-right"></i>
+                evidence supporting them.
+                <i class="fa-regular fa-square-caret-right"></i>
               </button>
             </div>
           </section>
@@ -78,6 +87,7 @@
     <!-- link javascript  -->
     <script src="./js/config.js"></script>
     <script src="./js/app.js"></script>
+    <script src="./js/promptHistory.js"></script>
 
     <!-- link font-awesome cdn  -->
     <script

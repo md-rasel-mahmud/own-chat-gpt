@@ -16,11 +16,50 @@ body {
 body > section {
   display: flex;
   min-height: 100vh;
+  position: relative;
+}
+
+/* menu button style  */
+.menu-btn {
+  position: fixed;
+  top: 0.2rem;
+  left: 0;
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  outline: none;
+  border: none;
+  padding: 0.5rem;
+  color: white;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  display: none;
+  padding-left: 2rem;
+  border: 2px solid green;
+  border-left: none;
+}
+.close-menu-btn {
+  position: absolute;
+  top: 0.2rem;
+  right: 0;
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 20;
+  outline: none;
+  border: none;
+  padding: 0.5rem 1rem;
+  color: white;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  display: none;
+  border: 2px solid white;
+  border-right: none;
+  background: linear-gradient(to right, red 0%, transparent 100%);
 }
 
 /* ================= Sidebar area start ================= */
 aside {
-  background-color: gray;
+  background-color: rgba(0, 0, 0, 0.8);
   padding: 2rem 1rem;
   width: 100%;
 }
@@ -30,10 +69,44 @@ aside {
 }
 
 .new-chat {
-  padding: 1rem;
-  border: 2px solid darkgray;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #ddd;
+  position: relative;
+  background: linear-gradient(to right, green, white),
+    linear-gradient(to right, green, white);
+  background-position: 0.5rem 0, 0.5rem 100%;
+  background-repeat: no-repeat;
+  background-size: calc(100% - 0.5rem - 0.5rem) 0.2rem;
+  padding: 14px 24px;
   border-radius: 0.5rem;
-  color: white;
+  border: none;
+}
+
+.new-chat:before,
+.new-chat:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 0.5rem;
+  top: 0;
+  bottom: 0;
+}
+
+.new-chat:before {
+  left: 0;
+  border: 0.2rem solid green;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  border-right-color: transparent;
+}
+
+.new-chat:after {
+  right: 0;
+  border: 0.2rem solid white;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  border-left-color: transparent;
 }
 .new-chat h4 {
   margin: 0;
@@ -45,27 +118,66 @@ aside {
 }
 
 .prompt-history {
-  background-color: rgba(0, 0, 0, 0.2);
+  background: linear-gradient(to right, green 20%, gray 100%);
   color: white;
   border-radius: 0.5rem;
   margin: 0.5rem 0;
   display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  justify-content: stretch;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.2rem;
+  justify-content: center;
+  padding: 0.2rem;
+}
+.prompt-history h4 {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  margin: 0;
   padding: 0.5rem;
+  border-radius: 0.5rem;
 }
 
-.prompt-history-btn {
-  border: none;
-  display: block;
-  flex-grow: 1;
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
+.prompt-history-msg {
   background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 0.5rem;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  height: 40px;
+}
+.prompt-history-btn {
+  margin: 0.5rem 0;
   color: white;
+  cursor: pointer;
   text-align: left;
+  border: none;
+  outline: none;
+  width: 100%;
+  background: linear-gradient(to right, lightgreen 40%, white 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  line-height: 1.5rem;
+  overflow: hidden;
+}
+.prompt-history-btn:hover {
+  background: linear-gradient(to right, white 40%, green 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.delete-btn {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  cursor: pointer;
+}
+.delete-btn:hover {
+  color: red;
+  background-color: gray;
 }
 
 /* ================= Sidebar area end ================= */
@@ -75,6 +187,11 @@ main {
   flex-grow: 1;
   padding: 1rem 10%;
   background-color: black;
+  background: linear-gradient(
+    to right,
+    rgba(0, 75, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
   color: white;
   position: relative;
 }
@@ -82,7 +199,7 @@ main {
 .conversation {
   overflow-y: auto;
   height: 80vh;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(0, 0, 0, 0.5);
   padding: 0.5rem;
   margin: 0.2rem;
   border-radius: 0.5rem;
@@ -92,11 +209,10 @@ main {
   min-width: 60vw;
 }
 
-.example-prompts{
+.example-prompts {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
-  min-height: 60%;
   align-content: end;
   padding: 0 1rem;
   overflow: auto;
@@ -104,29 +220,39 @@ main {
 .conversation section h2 {
   text-align: center;
   background-color: rgba(0, 0, 0, 0.2);
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   padding: 1rem 0;
 }
-.example-prompt{
+.example-prompt {
   padding: 1.5rem;
   background-color: rgba(0, 0, 0, 0.2);
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   color: white;
   cursor: pointer;
   text-align: left;
   line-height: 1.5rem;
+  background: linear-gradient(to right, green 0%, white 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  outline: none;
 }
-.example-prompt:hover{
-  background-color: rgba(0, 0, 0, 0.5);
+.example-prompt:hover {
+  background: linear-gradient(to right, white 0%, green 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  box-shadow: 0 5px 8px rgba(255, 255, 255, 0.2),
+    inset -5px 0 8px rgba(255, 255, 255, 0.2);
 }
 
 .conversation h1 {
-  color: white;
-  padding: 1rem;
+  background: linear-gradient(to right, green 0%, white 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.2rem;
   border-radius: 0.5rem;
-  /* background-color: darkgreen; */
+  font-size: 2.5rem;
 }
-
 article {
   background-color: rgba(255, 255, 255, 0.1);
   min-width: 96%;
@@ -145,17 +271,17 @@ article {
   padding: 0 1rem;
 }
 
-.error-message{
+.error-message {
   color: red;
 }
 
 .prompt-form {
-  background-color: gray;
   margin: 0.5rem auto;
   padding: 0;
   display: flex;
   border-radius: 0.5rem;
   overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 /*  placeholder style  */
@@ -164,12 +290,13 @@ article {
 }
 
 .prompt-form input[type="text"] {
-  background-color: transparent;
+  background: transparent;
   padding: 1.2rem 1rem;
   width: 90%;
   border: none;
   color: white;
   outline: none;
+  font-size: 1.2rem;
 }
 .prompt-form button[type="submit"] {
   border: none;
@@ -207,43 +334,54 @@ article {
 
 /* Loader area start  */
 
-.loader{
+.loader {
   display: flex;
-  gap: .2rem;
+  gap: 0.2rem;
   align-items: center;
-  color: rgba(135, 211, 124,1);
+  color: rgba(135, 211, 124, 1);
 }
 
 .loader-animation {
-  width:50px;
-  height:50px;
-  display:inline-block;
-  padding:0px;
-  text-align:left;
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  padding: 0px;
+  text-align: left;
 }
 .loader-animation span {
-  position:absolute;
-  display:inline-block;
-  width:50px;
-  height:50px;
-  border-radius:100%;
-  background:rgba(135, 211, 124,1);
-  -webkit-animation:loader-animation 1.5s linear infinite;
-  animation:loader-animation 1.5s linear infinite;
+  position: absolute;
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  background: rgba(135, 211, 124, 1);
+  -webkit-animation: loader-animation 1.5s linear infinite;
+  animation: loader-animation 1.5s linear infinite;
 }
 .loader-animation span:last-child {
-  animation-delay:-0.9s;
-  -webkit-animation-delay:-0.9s;
+  animation-delay: -0.9s;
+  -webkit-animation-delay: -0.9s;
 }
 @keyframes loader-animation {
-  0% {transform: scale(0, 0);opacity:0.8;}
-  100% {transform: scale(1, 1);opacity:0;}
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1, 1);
+    opacity: 0;
+  }
 }
 @-webkit-keyframes loader-animation {
-  0% {-webkit-transform: scale(0, 0);opacity:0.8;}
-  100% {-webkit-transform: scale(1, 1);opacity:0;}
+  0% {
+    -webkit-transform: scale(0, 0);
+    opacity: 0.8;
+  }
+  100% {
+    -webkit-transform: scale(1, 1);
+    opacity: 0;
+  }
 }
-
 
 /* Loader area End  */
 
@@ -252,21 +390,35 @@ article {
 /* ================= Responsive area start =================  */
 @media (max-width: 768px) {
   aside {
-    display: none;
+    width: 60vw;
+    position: fixed;
+    z-index: 11;
+    height: 100vh;
+    margin-left: -70vw;
+    padding-top: 3rem;
+  }
+  .menu-btn {
+    display: block;
+  }
+  .close-menu-btn {
+    display: block;
   }
   main {
     padding: 0.2rem;
   }
+  .conversation h1 {
+    font-size: 1.5rem;
+  }
   article {
     min-width: 80vw;
   }
-  .example-prompts{
+  .example-prompts {
     grid-template-columns: repeat(1, minmax(0, 1fr));
     align-content: baseline;
-    gap: .5rem;
+    gap: 0.5rem;
   }
-  .example-prompt{
-    padding: .5rem;
+  .example-prompt {
+    padding: 0.5rem;
   }
 
   #scrollbar-style::-webkit-scrollbar {
@@ -275,5 +427,3 @@ article {
   }
 }
 /* ================= Responsive area End =================  */
-
-
