@@ -205,7 +205,11 @@ const handleDeleteBtn = (event) => {
 // click new chat to append example prompts
 const newChat = document.querySelector(".new-chat");
 newChat.addEventListener("click", () => {
-  document.querySelector(".quick-example-prompt").innerHTML = `
+
+  conversation.innerHTML = `
+  <h1>OWN CHAT-GPT</h1>
+
+  <section class="quick-example-prompt">
     <h2>EXAMPLES</h2>
     <div class="example-prompts">
       <button onclick="handleExamplePrompt(event)" class="example-prompt">
@@ -238,9 +242,11 @@ newChat.addEventListener("click", () => {
         evidence supporting them.
         <i class="fa-regular fa-square-caret-right"></i>
       </button>
-    </div>`;
-    promptSubmit.userPrompt.value = '';
-    promptSubmit.userPrompt.focus();
+    </div>
+  </section>`;
+
+  promptSubmit.userPrompt.value = "";
+  promptSubmit.userPrompt.focus();
 });
 
 // click example set prompts to user input
